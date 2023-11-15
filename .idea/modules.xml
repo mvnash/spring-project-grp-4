@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/authentication/authentication.iml" filepath="$PROJECT_DIR$/authentication/authentication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/call/call.iml" filepath="$PROJECT_DIR$/call/call.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/execution/execution.iml" filepath="$PROJECT_DIR$/execution/execution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/investor/investor.iml" filepath="$PROJECT_DIR$/investor/investor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/matching/matching.iml" filepath="$PROJECT_DIR$/matching/matching.iml" />
+      <module fileurl="file://$PROJECT_DIR$/order/order.iml" filepath="$PROJECT_DIR$/order/order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/price/price.iml" filepath="$PROJECT_DIR$/price/price.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring-project-grp-4.iml" filepath="$PROJECT_DIR$/.idea/spring-project-grp-4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wallet/wallet.iml" filepath="$PROJECT_DIR$/wallet/wallet.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="call" />
+        <module name="execution" />
+        <module name="investor" />
+        <module name="wallet" />
+        <module name="price" />
+        <module name="eureka" />
+        <module name="gateway" />
+        <module name="authentication" />
+        <module name="matching" />
+        <module name="order" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="authentication" target="17" />
+      <module name="call" target="17" />
+      <module name="eureka" target="17" />
+      <module name="execution" target="17" />
+      <module name="gateway" target="17" />
+      <module name="investor" target="17" />
+      <module name="matching" target="17" />
+      <module name="order" target="17" />
+      <module name="price" target="17" />
+      <module name="wallet" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="authentication" options="-parameters" />
+      <module name="call" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="execution" options="-parameters" />
+      <module name="gateway" options="-parameters" />
+      <module name="investor" options="-parameters" />
+      <module name="matching" options="-parameters" />
+      <module name="order" options="-parameters" />
+      <module name="price" options="-parameters" />
+      <module name="wallet" options="-parameters" />
+    </option>
+  </component>
+</project>
