@@ -3,6 +3,8 @@ package be.vinci.ipl.order;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +17,7 @@ import lombok.ToString;
 @Entity(name = "orders")
 public class Order {
   @Id
-  @Column()
+  @Column(nullable = true)
   private String guid;
 
   @Column(nullable = false)
@@ -30,11 +32,13 @@ public class Order {
   @Column(nullable = false)
   private int quantity;
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private String side;
+  private OrderSide side;
 
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private String type;
+  private OrderType type;
 
   @Column
   private Double limit;
@@ -47,9 +51,8 @@ public class Order {
         timestamp <= 0 ||
         ticker == null || ticker.isBlank() ||
         quantity <= 0 ||
-        side == null || (!side.equals("BUY") && !side.equals("SELL")) ||
-        type == null || (!type.equals("MARKET") && !type.equals("LIMIT")) ||
-        (type.equals("LIMIT") && limit == null) ||
+        side == null ||
+        type == null || (type == OrderType.LIMIT && limit == null) ||
         filled < 0;
   }
 }
