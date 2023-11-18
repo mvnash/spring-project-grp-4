@@ -13,8 +13,8 @@
         <module name="price" />
         <module name="eureka" />
         <module name="gateway" />
-        <module name="authentication" />
         <module name="matching" />
+        <module name="authentication" />
         <module name="order" />
       </profile>
     </annotationProcessing>
