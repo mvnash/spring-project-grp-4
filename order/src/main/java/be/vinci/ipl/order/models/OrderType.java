@@ -1,4 +1,4 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models;
 
 /**
  * Enumeration representing the types of orders that are allowed within the VSX platform.

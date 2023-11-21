@@ -1,4 +1,4 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

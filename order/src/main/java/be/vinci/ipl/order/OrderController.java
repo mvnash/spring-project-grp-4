@@ -1,5 +1,7 @@
 package be.vinci.ipl.order;
 
+import be.vinci.ipl.order.models.Order;
+import be.vinci.ipl.order.models.OrderUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

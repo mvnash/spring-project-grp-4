@@ -1,4 +1,4 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models;
 
 /**
  * Enumeration representing the side of an order, indicating whether it is a BUY or SELL order.

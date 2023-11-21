@@ -1,4 +1,4 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models;
 
 import lombok.Getter;
 import lombok.Setter;
