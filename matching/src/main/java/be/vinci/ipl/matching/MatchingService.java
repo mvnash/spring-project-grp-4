@@ -55,7 +55,7 @@ public class MatchingService {
           .sorted(Comparator.comparingLong(Order::getTimestamp))
           .toList();
 
-      // Implement the matching algorithm
+      // Matching algorithm
       for (Order buyOrder : buyOrders) {
         for (Order sellOrder : sellOrders) {
           if (isMatch(buyOrder, sellOrder)){
@@ -123,8 +123,38 @@ public class MatchingService {
    * @return The transaction price.
    */
   private double determineTransactionPrice(Order buyOrder, Order sellOrder) {
-    String ticker = buyOrder.getTicker();
-    return (sellOrder.getType() == OrderType.LIMIT) ? sellOrder.getLimit()
-        : priceProxy.getLastExecutedPrice(ticker);
+    // Default price in case of unexpected conditions
+    double price = 1.0;
+
+    // Get the order types
+    OrderType buyOrderType = buyOrder.getType();
+    OrderType sellOrderType = sellOrder.getType();
+
+    // Check the type of buy order
+    if (buyOrderType.equals(OrderType.MARKET)) {
+      // BUY: MARKET & SELL: MARKET
+      if (sellOrderType.equals(OrderType.MARKET)) {
+        String ticker = buyOrder.getTicker();
+        // Retrieve the last executed price for the ticker
+        double lastPrice = priceProxy.getLastExecutedPrice(ticker);
+        if (lastPrice > 0.0) {
+          price = lastPrice;
+        }
+      } else {
+        // BUY: MARKET & SELL: LIMIT
+        price = sellOrder.getLimit();
+      }
+    } else {
+      // BUY: LIMIT & SELL: MARKET
+      if (sellOrderType.equals(OrderType.MARKET)) {
+        price = buyOrder.getLimit();
+      } else {
+        // BUY: LIMIT & SELL: LIMIT
+        // Calculate the average of buy and sell order limits
+        price = (buyOrder.getLimit() + sellOrder.getLimit()) / 2;
+      }
+    }
+
+    return price;
   }
 }
