@@ -43,39 +43,44 @@ public class MatchingService {
    * @return true if the matching process was successful, false otherwise.
    */
   public boolean matchOrdersByTicker(String ticker) {
-    // Retrieve buy and sell orders for the specified ticker
-    List<Order> buyOrders = StreamSupport.stream(orderProxy.readOrdersByTickerAndSide(ticker,
-            String.valueOf(OrderSide.BUY)).spliterator(), false)
-        .sorted(Comparator.comparingLong(Order::getTimestamp))
-        .toList();
+    try {
+      // Retrieve buy and sell orders for the specified ticker
+      List<Order> buyOrders = StreamSupport.stream(orderProxy.readOrdersByTickerAndSide(ticker,
+              String.valueOf(OrderSide.BUY)).spliterator(), false)
+          .sorted(Comparator.comparingLong(Order::getTimestamp))
+          .toList();
 
-    List<Order> sellOrders = StreamSupport.stream(orderProxy.readOrdersByTickerAndSide(ticker,
-            String.valueOf(OrderSide.SELL)).spliterator(), false)
-        .sorted(Comparator.comparingLong(Order::getTimestamp))
-        .toList();
+      List<Order> sellOrders = StreamSupport.stream(orderProxy.readOrdersByTickerAndSide(ticker,
+              String.valueOf(OrderSide.SELL)).spliterator(), false)
+          .sorted(Comparator.comparingLong(Order::getTimestamp))
+          .toList();
 
-    // Implement the matching algorithm
-    for (Order buyOrder : buyOrders) {
-      for (Order sellOrder : sellOrders) {
-        if (isMatch(buyOrder, sellOrder)){
-          int quantityToMatch = calculateQuantityToMatch(buyOrder, sellOrder);
+      // Implement the matching algorithm
+      for (Order buyOrder : buyOrders) {
+        for (Order sellOrder : sellOrders) {
+          if (isMatch(buyOrder, sellOrder)){
+            int quantityToMatch = calculateQuantityToMatch(buyOrder, sellOrder);
 
-          if (quantityToMatch > 0) {
-            String seller = sellOrder.getOwner();
-            String buyer = buyOrder.getOwner();
-            String sellOrderGuid = sellOrder.getGuid();
-            String buyOrderGuid = buyOrder.getGuid();
-            double price = determineTransactionPrice(buyOrder, sellOrder);
+            if (quantityToMatch > 0) {
+              String seller = sellOrder.getOwner();
+              String buyer = buyOrder.getOwner();
+              String sellOrderGuid = sellOrder.getGuid();
+              String buyOrderGuid = buyOrder.getGuid();
+              double price = determineTransactionPrice(buyOrder, sellOrder);
 
-            // Create a transaction
-            Transaction transaction = new Transaction(ticker, seller, buyer, sellOrderGuid,
-                buyOrderGuid, quantityToMatch, price);
+              // Create a transaction
+              Transaction transaction = new Transaction(ticker, seller, buyer, sellOrderGuid,
+                  buyOrderGuid, quantityToMatch, price);
 
-            // Execute the matching orders
-            executionProxy.executeMatchingOrders(ticker, buyer, seller, transaction);
+              // Execute the matching orders
+              executionProxy.executeMatchingOrders(ticker, buyer, seller, transaction);
+            }
           }
         }
       }
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
     }
 
     return true;
