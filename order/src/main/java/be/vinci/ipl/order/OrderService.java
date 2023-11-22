@@ -3,6 +3,7 @@ package be.vinci.ipl.order;
 import be.vinci.ipl.order.models.Order;
 import be.vinci.ipl.order.models.OrderSide;
 import be.vinci.ipl.order.models.OrderUpdateRequest;
+import be.vinci.ipl.order.repositories.MatchingProxy;
 import be.vinci.ipl.order.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,30 +16,40 @@ import java.util.List;
 public class OrderService {
 
   private final OrderRepository orderRepository;
+  private final MatchingProxy matchingProxy;
 
   /**
    * Constructs an OrderService with the provided OrderRepository.
    *
    * @param orderRepository The repository for orders.
    */
-  public OrderService(OrderRepository orderRepository) {
+  public OrderService(OrderRepository orderRepository, MatchingProxy matchingProxy) {
     this.orderRepository = orderRepository;
+    this.matchingProxy = matchingProxy;
   }
 
   /**
-   * Places a new order in the system.
+   * Places an order in the order repository and triggers the matching process.
    *
    * @param order The order to be placed.
-   * @return The placed order, or null if an order with the same guid already exists.
+   * @return The placed order if successful, null if an order with the same GUID already exists.
    */
   public Order placeOrder(Order order) {
+    // Check if an order with the same GUID already exists
     if (orderRepository.existsById(order.getGuid())) {
-      return null; // Order with the same guid already exists
+      return null; // Order with the same GUID already exists
     }
 
+    // Save the order in the repository
     orderRepository.save(order);
+
+    // Trigger the matching process for the order's ticker
+    matchingProxy.triggerMatching(order.getTicker());
+
+    // Return the placed order
     return order;
   }
+
 
   /**
    * Retrieves the details of a specific order by its guid.
