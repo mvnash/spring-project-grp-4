@@ -67,7 +67,7 @@ public class Order {
   /**
    * The limit price for a LIMIT order. Only applicable if the order type is LIMIT.
    */
-  @Column
+  @Column(name = "order_limit")
   private Double limit;
 
   /**
