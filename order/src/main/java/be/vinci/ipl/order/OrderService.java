@@ -3,7 +3,7 @@ package be.vinci.ipl.order;
 import be.vinci.ipl.order.models.Order;
 import be.vinci.ipl.order.models.OrderSide;
 import be.vinci.ipl.order.models.OrderUpdateRequest;
-import be.vinci.ipl.order.models.repositories.OrderRepository;
+import be.vinci.ipl.order.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
