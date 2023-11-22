@@ -23,7 +23,7 @@ public class Order {
    * Unique identifier for the order.
    */
   @Id
-  @Column(nullable = true)
+  @Column()
   private String guid;
 
   /**
