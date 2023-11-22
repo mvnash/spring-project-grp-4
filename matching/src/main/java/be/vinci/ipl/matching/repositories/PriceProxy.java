@@ -1,4 +1,4 @@
-package be.vinci.ipl.matching.proxys;
+package be.vinci.ipl.matching.repositories;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Repository;

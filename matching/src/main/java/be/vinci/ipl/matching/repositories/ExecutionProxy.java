@@ -1,4 +1,4 @@
-package be.vinci.ipl.matching.proxys;
+package be.vinci.ipl.matching.repositories;
 
 import be.vinci.ipl.matching.models.Transaction;
 import org.springframework.cloud.openfeign.FeignClient;
