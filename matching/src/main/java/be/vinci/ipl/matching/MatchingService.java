@@ -30,7 +30,8 @@ public class MatchingService {
    * @param executionProxy  The proxy for accessing execution-related operations.
    * @param priceProxy      The proxy for accessing price-related operations.
    */
-  public MatchingService(OrderProxy orderProxy, ExecutionProxy executionProxy, PriceProxy priceProxy) {
+  public MatchingService(OrderProxy orderProxy, ExecutionProxy executionProxy,
+      PriceProxy priceProxy) {
     this.orderProxy = orderProxy;
     this.executionProxy = executionProxy;
     this.priceProxy = priceProxy;
@@ -38,7 +39,8 @@ public class MatchingService {
 
   /**
    * Attempts to find matches between buy and sell orders for a specified financial instrument.
-   * Retrieves orders for matching from the order service, sorts them by timestamp, and generates a list of transactions.
+   * Retrieves orders for matching from the order service, sorts them by timestamp,
+   * and generates a list of transactions.
    * Finally, executes the transactions by invoking the execution service.
    *
    * @param ticker The ticker symbol for the financial instrument.
@@ -82,7 +84,9 @@ public class MatchingService {
    * @param sellOrders  The list of sell orders for the specified ticker.
    * @return An ArrayList of Transaction objects representing matched transactions.
    */
-  private ArrayList<Transaction> getTransactions(String ticker, List<Order> buyOrders, List<Order> sellOrders) {
+  private ArrayList<Transaction> getTransactions(String ticker, List<Order> buyOrders,
+      List<Order> sellOrders) {
+
     ArrayList<Transaction> transactions = new ArrayList<>();
 
     for (Order buyOrder : buyOrders) {
