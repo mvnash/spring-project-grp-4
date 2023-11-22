@@ -72,7 +72,8 @@ public class OrderController {
    * @return ResponseEntity with HTTP status indicating the success of the update.
    */
   @PatchMapping("/{guid}")
-  public ResponseEntity<Void> updateOrder(@PathVariable String guid, @RequestBody OrderUpdateRequest updateRequest) {
+  public ResponseEntity<Void> updateOrder(@PathVariable String guid,
+      @RequestBody OrderUpdateRequest updateRequest) {
     boolean updated = orderService.updateOrder(guid, updateRequest);
 
     if (!updated) {
@@ -107,7 +108,8 @@ public class OrderController {
    * @return ResponseEntity containing the list of open orders and HTTP status.
    */
   @GetMapping("/open/by-ticker/{ticker}/{side}")
-  public ResponseEntity<List<Order>> getOpenOrdersByTickerAndSide(@PathVariable String ticker, @PathVariable String side) {
+  public ResponseEntity<List<Order>> getOpenOrdersByTickerAndSide(@PathVariable String ticker,
+      @PathVariable String side) {
     List<Order> openOrders = orderService.getOpenOrdersByTickerAndSide(ticker, side);
 
     return new ResponseEntity<>(openOrders, HttpStatus.OK);
