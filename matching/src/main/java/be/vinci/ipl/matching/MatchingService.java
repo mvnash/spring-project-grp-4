@@ -98,8 +98,8 @@ public class MatchingService {
             double price = determineTransactionPrice(buyOrder, sellOrder);
 
             // Create a transaction
-            Transaction transaction = new Transaction(ticker, seller, buyer, sellOrderGuid, buyOrderGuid,
-                    quantityToMatch, price);
+            Transaction transaction = new Transaction(ticker, seller, buyer, sellOrderGuid,
+                buyOrderGuid, quantityToMatch, price);
             transactions.add(transaction);
 
             // Update filled quantity in buy and sell orders
