@@ -23,7 +23,7 @@ public interface ExecutionProxy {
    * @param transaction The transaction details.
    */
   @PostMapping("/execute/{ticker}/{seller}/{buyer}")
-  void executeMatchingOrders(@PathVariable String ticker, @PathVariable String seller,
-      @PathVariable String buyer, @RequestBody Transaction transaction);
+  void executeTransaction(@PathVariable String ticker, @PathVariable String seller,
+                          @PathVariable String buyer, @RequestBody Transaction transaction);
 
 }
