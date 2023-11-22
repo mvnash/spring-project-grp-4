@@ -7,6 +7,8 @@ import be.vinci.ipl.matching.models.Transaction;
 import be.vinci.ipl.matching.repositories.ExecutionProxy;
 import be.vinci.ipl.matching.repositories.OrderProxy;
 import be.vinci.ipl.matching.repositories.PriceProxy;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -36,8 +38,8 @@ public class MatchingService {
 
   /**
    * Attempts to find matches between buy and sell orders for a specified financial instrument.
-   * Retrieves orders for matching from the order service.
-   * When matches are found, contacts the execution service for each transaction to be executed.
+   * Retrieves orders for matching from the order service, sorts them by timestamp, and generates a list of transactions.
+   * Finally, executes the transactions by invoking the execution service.
    *
    * @param ticker The ticker symbol for the financial instrument.
    * @return true if the matching process was successful, false otherwise.
@@ -46,44 +48,69 @@ public class MatchingService {
     try {
       // Retrieve buy and sell orders for the specified ticker
       List<Order> buyOrders = StreamSupport.stream(orderProxy.readOrdersByTickerAndSide(ticker,
-              String.valueOf(OrderSide.BUY)).spliterator(), false)
-          .sorted(Comparator.comparingLong(Order::getTimestamp))
-          .toList();
+                      String.valueOf(OrderSide.BUY)).spliterator(), false)
+              .sorted(Comparator.comparingLong(Order::getTimestamp))
+              .toList();
 
       List<Order> sellOrders = StreamSupport.stream(orderProxy.readOrdersByTickerAndSide(ticker,
-              String.valueOf(OrderSide.SELL)).spliterator(), false)
-          .sorted(Comparator.comparingLong(Order::getTimestamp))
-          .toList();
+                      String.valueOf(OrderSide.SELL)).spliterator(), false)
+              .sorted(Comparator.comparingLong(Order::getTimestamp))
+              .toList();
 
-      // Matching algorithm
-      for (Order buyOrder : buyOrders) {
-        for (Order sellOrder : sellOrders) {
-          if (isMatch(buyOrder, sellOrder)){
-            int quantityToMatch = calculateQuantityToMatch(buyOrder, sellOrder);
+      // Generate a list of transactions based on matching orders
+      ArrayList<Transaction> transactions = getTransactions(ticker, buyOrders, sellOrders);
 
-            if (quantityToMatch > 0) {
-              String seller = sellOrder.getOwner();
-              String buyer = buyOrder.getOwner();
-              String sellOrderGuid = sellOrder.getGuid();
-              String buyOrderGuid = buyOrder.getGuid();
-              double price = determineTransactionPrice(buyOrder, sellOrder);
+      // Execute the transactions
+      executeTransactions(transactions);
 
-              // Create a transaction
-              Transaction transaction = new Transaction(ticker, seller, buyer, sellOrderGuid,
-                  buyOrderGuid, quantityToMatch, price);
-
-              // Execute the matching orders
-              executionProxy.executeMatchingOrders(ticker, buyer, seller, transaction);
-            }
-          }
-        }
-      }
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
 
     return true;
+  }
+
+  /**
+   * Generates a list of transactions based on matching buy and sell orders for a specific ticker.
+   * This method iterates through the provided buy and sell orders, identifies matching pairs,
+   * calculates the quantity to match, creates a transaction, and updates the filled quantity in
+   * the corresponding buy and sell orders.
+   *
+   * @param ticker      The ticker symbol for the financial instrument.
+   * @param buyOrders   The list of buy orders for the specified ticker.
+   * @param sellOrders  The list of sell orders for the specified ticker.
+   * @return An ArrayList of Transaction objects representing matched transactions.
+   */
+  private ArrayList<Transaction> getTransactions(String ticker, List<Order> buyOrders, List<Order> sellOrders) {
+    ArrayList<Transaction> transactions = new ArrayList<>();
+
+    for (Order buyOrder : buyOrders) {
+      for (Order sellOrder : sellOrders) {
+        if (isMatch(buyOrder, sellOrder)) {
+          int quantityToMatch = calculateQuantityToMatch(buyOrder, sellOrder);
+
+          if (quantityToMatch > 0) {
+            String seller = sellOrder.getOwner();
+            String buyer = buyOrder.getOwner();
+            String sellOrderGuid = sellOrder.getGuid();
+            String buyOrderGuid = buyOrder.getGuid();
+            double price = determineTransactionPrice(buyOrder, sellOrder);
+
+            // Create a transaction
+            Transaction transaction = new Transaction(ticker, seller, buyer, sellOrderGuid, buyOrderGuid,
+                    quantityToMatch, price);
+            transactions.add(transaction);
+
+            // Update filled quantity in buy and sell orders
+            updateFilledQuantity(buyOrder, quantityToMatch);
+            updateFilledQuantity(sellOrder, quantityToMatch);
+          }
+        }
+      }
+    }
+
+    return transactions;
   }
 
   /**
@@ -112,7 +139,7 @@ public class MatchingService {
    */
   private int calculateQuantityToMatch(Order buyOrder, Order sellOrder) {
     return Math.min(buyOrder.getQuantity() - buyOrder.getFilled(),
-        sellOrder.getQuantity() - sellOrder.getFilled());
+            sellOrder.getQuantity() - sellOrder.getFilled());
   }
 
   /**
@@ -156,5 +183,32 @@ public class MatchingService {
     }
 
     return price;
+  }
+
+  /**
+   * Updates the filled quantity in the given order based on the quantity matched in a transaction.
+   *
+   * @param order            The order to be updated.
+   * @param quantityMatched The quantity matched in a transaction.
+   */
+  private void updateFilledQuantity(Order order, int quantityMatched) {
+    int newFilledQuantity = order.getFilled() + quantityMatched;
+    order.setFilled(newFilledQuantity);
+  }
+
+  /**
+   * Executes a list of transactions by invoking the execution service for each transaction.
+   *
+   * @param transactions The list of transactions to be executed.
+   */
+  private void executeTransactions(List<Transaction> transactions) {
+    for (Transaction transaction : transactions) {
+      String ticker = transaction.getTicker();
+      String buyer = transaction.getBuyer();
+      String seller = transaction.getSeller();
+
+      // Execute the transaction using the executionProxy
+      executionProxy.executeTransaction(ticker, buyer, seller, transaction);
+    }
   }
 }
