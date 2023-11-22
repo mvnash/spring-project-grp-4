@@ -1,7 +1,8 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models.repositories;
 
 import be.vinci.ipl.order.models.Order;
 import be.vinci.ipl.order.models.OrderSide;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Repository interface for managing orders in the system.
  */
+@EnableFeignClients
 @Repository
 public interface OrderRepository extends CrudRepository<Order, String> {
 
