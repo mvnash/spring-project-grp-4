@@ -3,6 +3,7 @@ package be.vinci.ipl.order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * The main class for the Order microservice application.
@@ -16,10 +17,11 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  *
  * @see SpringBootApplication
  * @see EnableDiscoveryClient
+ * @see EnableFeignClients
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClient
+@EnableFeignClients
 public class OrderApplication {
 
     /**
