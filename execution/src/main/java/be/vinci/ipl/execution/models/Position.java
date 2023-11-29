@@ -1,6 +1,8 @@
 package be.vinci.ipl.execution.models;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter

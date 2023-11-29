@@ -1,11 +1,5 @@
 package be.vinci.ipl.price;
 
-import feign.FeignException;
-import jakarta.persistence.Tuple;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.stereotype.Service;
 
 import be.vinci.ipl.price.models.Price;
@@ -27,7 +21,9 @@ public class PriceService {
     public Double getLastSalePrice(String ticker) {
         Price price = repository.findById(ticker).orElse(null);
         if (price == null){ // TODO requis ?
-            price = new Price(ticker, 1);
+            price = new Price(); // TODO un autre new ?
+            price.setTicker(ticker);
+            price.setValue(1.0);
             repository.save(price);
         }
         
@@ -43,7 +39,7 @@ public class PriceService {
     public boolean updateLastSalePrice(String ticker, Double newPrice) {
         if (!repository.existsById(ticker)) return false;
 
-        Price price = repository.findById(ticker);
+        Price price = repository.findById(ticker).orElse(null); // TODO fix this
         price.setValue(newPrice);
         repository.save(price);
 
