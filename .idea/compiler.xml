@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -10,12 +11,18 @@
         <module name="execution" />
         <module name="investor" />
         <module name="wallet" />
-        <module name="price" />
         <module name="eureka" />
+        <module name="price" />
         <module name="gateway" />
+<<<<<<< HEAD
         <module name="order" />
         <module name="authentication" />
         <module name="matching" />
+=======
+        <module name="matching" />
+        <module name="order" />
+        <module name="authentication" />
+>>>>>>> 86ab9265b6c6e257441cc5e647bc6ea13d97cecf
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
