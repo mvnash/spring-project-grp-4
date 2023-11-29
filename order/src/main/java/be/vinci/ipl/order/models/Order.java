@@ -86,7 +86,8 @@ public class Order {
         ticker == null || ticker.isBlank() ||
         quantity <= 0 ||
         side == null ||
-        type == null || (type == OrderType.LIMIT && limit == null) ||
+        type == null || (type == OrderType.LIMIT && (limit == null || limit < 0)) ||
+            (type == OrderType.MARKET && limit != null) ||
         filled < 0;
   }
 }
