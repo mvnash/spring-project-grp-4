@@ -154,23 +154,18 @@ public class MatchingService {
    * @return The transaction price.
    */
   private double determineTransactionPrice(Order buyOrder, Order sellOrder) {
-    // Default price in case of unexpected conditions
-    double price = 1.0;
+    double price;
 
     // Get the order types
     OrderType buyOrderType = buyOrder.getType();
     OrderType sellOrderType = sellOrder.getType();
 
-    // Check the type of buy order
     if (buyOrderType.equals(OrderType.MARKET)) {
       // BUY: MARKET & SELL: MARKET
       if (sellOrderType.equals(OrderType.MARKET)) {
         String ticker = buyOrder.getTicker();
-        // Retrieve the last executed price for the ticker
-        double lastPrice = priceProxy.getLastExecutedPrice(ticker);
-        if (lastPrice > 0.0) {
-          price = lastPrice;
-        }
+        // Retrieve the last executed price for the ticker in case of two market orders
+        price = priceProxy.getLastExecutedPrice(ticker);
       } else {
         // BUY: MARKET & SELL: LIMIT
         price = sellOrder.getLimit();
