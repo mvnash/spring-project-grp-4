@@ -21,7 +21,7 @@ public class PriceService {
     public Double getLastSalePrice(String ticker) {
         Price price = repository.findById(ticker).orElse(null);
         if (price == null){ // TODO requis ?
-            price = new Price(); // TODO un autre new ?
+            price = new Price(); // TODO un autre new ??
             price.setTicker(ticker);
             price.setValue(1.0);
             repository.save(price);
