@@ -20,7 +20,7 @@ public class Order {
    */
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  @Column()
+  @Column
   private String guid;
 
   /**
@@ -70,7 +70,7 @@ public class Order {
   /**
    * The quantity of the financial instrument that has already been traded.
    */
-  @Column(nullable = false)
+  @Column
   private int filled;
 
   /**
