@@ -31,7 +31,7 @@ public class PriceService {
             repository.save(price);
         }
         
-        return price.value;
+        return price.getValue();
     }
 
     /**
@@ -44,7 +44,7 @@ public class PriceService {
         if (!repository.existsById(ticker)) return false;
 
         Price price = repository.findById(ticker);
-        price.value = newPrice;
+        price.setValue(newPrice);
         repository.save(price);
 
         return true;
