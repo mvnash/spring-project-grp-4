@@ -1,10 +1,6 @@
 package be.vinci.ipl.order.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +19,7 @@ public class Order {
    * Unique identifier for the order.
    */
   @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
   @Column()
   private String guid;
 
