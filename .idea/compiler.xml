@@ -14,9 +14,15 @@
         <module name="eureka" />
         <module name="price" />
         <module name="gateway" />
+<<<<<<< HEAD
+        <module name="order" />
+        <module name="authentication" />
+        <module name="matching" />
+=======
         <module name="matching" />
         <module name="order" />
         <module name="authentication" />
+>>>>>>> 86ab9265b6c6e257441cc5e647bc6ea13d97cecf
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
