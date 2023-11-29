@@ -21,16 +21,17 @@ public class ExecutionController {
         @PathVariable String ticker, @PathVariable String seller, @PathVariable String buyer, 
         @RequestBody Transaction transaction
     ) {
-        if (   !Objects.equals(transaction.getTicker(), ticker)
-            || !Objects.equals(transaction.getSeller(), seller)
-            || !Objects.equals(transaction.getBuyer(), buyer)) 
+        if (   !transaction.getTicker().equals(ticker)
+            || !transaction.getSeller().equals(seller)
+            || !transaction.getBuyer().equals(buyer))
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         
-        Mono<Boolean> result = service.executeTransaction(transaction);
+        service.executeTransaction(transaction);
 
-        if (!result.block()) return new ResponseEntity<>(HttpStatus.CONFLICT);
-        else return new ResponseEntity<>(HttpStatus.OK);
+        //if (!result.block()) return new ResponseEntity<>(HttpStatus.CONFLICT);
+        //else // TODO
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
