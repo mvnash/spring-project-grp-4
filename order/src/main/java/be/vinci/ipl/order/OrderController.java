@@ -44,7 +44,7 @@ public class OrderController {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
+    return new ResponseEntity<>(createdOrder, HttpStatus.OK);
   }
 
   /**
