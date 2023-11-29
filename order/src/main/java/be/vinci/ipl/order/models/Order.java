@@ -78,7 +78,8 @@ public class Order {
    * @return true if the order is invalid, false otherwise.
    */
   public boolean invalid() {
-    return owner == null || owner.isBlank() ||
+    return guid != null ||
+        owner == null || owner.isBlank() ||
         timestamp <= 0 ||
         ticker == null || ticker.isBlank() ||
         quantity <= 0 ||
