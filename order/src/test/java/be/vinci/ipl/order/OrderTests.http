@@ -69,3 +69,181 @@ Content-Type: application/json
   "limit": 150.0,
   "filled": 5
 }
+
+### Place an incorrect order (bad owner)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no owner)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad timestamp)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": -1,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (blank ticker)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no ticker)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad quantity)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": -10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no side)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad side)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "TEST",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no type)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad type)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "TEST",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no limit)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT"
+}
+
+### Place an incorrect order (bad limit)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": -150.0
+}
+
+### Place an incorrect order (market order whith limit)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "MARKET",
+  "limit": 150.0
+}
+
