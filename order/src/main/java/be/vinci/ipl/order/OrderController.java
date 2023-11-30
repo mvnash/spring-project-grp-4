@@ -1,5 +1,7 @@
 package be.vinci.ipl.order;
 
+import be.vinci.ipl.order.models.Order;
+import be.vinci.ipl.order.models.OrderUpdateRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,10 +41,10 @@ public class OrderController {
     Order createdOrder = orderService.placeOrder(order);
 
     if (createdOrder == null) {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
+    return new ResponseEntity<>(createdOrder, HttpStatus.OK);
   }
 
   /**
@@ -70,7 +72,18 @@ public class OrderController {
    * @return ResponseEntity with HTTP status indicating the success of the update.
    */
   @PatchMapping("/{guid}")
-  public ResponseEntity<Void> updateOrder(@PathVariable String guid, @RequestBody OrderUpdateRequest updateRequest) {
+  public ResponseEntity<Void> updateOrder(@PathVariable String guid,
+      @RequestBody OrderUpdateRequest updateRequest) {
+
+    Order orderToPatch = orderService.getOrderDetails(guid);
+    int oldFilled = orderToPatch.getFilled();
+    int newFilled = updateRequest.getFilled();
+    int quantity = orderToPatch.getQuantity();
+
+    if (newFilled <= oldFilled || newFilled > quantity || updateRequest.invalid()) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     boolean updated = orderService.updateOrder(guid, updateRequest);
 
     if (!updated) {
@@ -105,7 +118,8 @@ public class OrderController {
    * @return ResponseEntity containing the list of open orders and HTTP status.
    */
   @GetMapping("/open/by-ticker/{ticker}/{side}")
-  public ResponseEntity<List<Order>> getOpenOrdersByTickerAndSide(@PathVariable String ticker, @PathVariable String side) {
+  public ResponseEntity<List<Order>> getOpenOrdersByTickerAndSide(@PathVariable String ticker,
+      @PathVariable String side) {
     List<Order> openOrders = orderService.getOpenOrdersByTickerAndSide(ticker, side);
 
     return new ResponseEntity<>(openOrders, HttpStatus.OK);

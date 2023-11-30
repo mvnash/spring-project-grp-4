@@ -1,5 +1,9 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.repositories;
 
+import be.vinci.ipl.order.models.Order;
+import be.vinci.ipl.order.models.OrderSide;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +12,7 @@ import java.util.List;
 /**
  * Repository interface for managing orders in the system.
  */
+@EnableFeignClients
 @Repository
 public interface OrderRepository extends CrudRepository<Order, String> {
 
@@ -26,6 +31,7 @@ public interface OrderRepository extends CrudRepository<Order, String> {
    * @param side   The side of the order (BUY or SELL).
    * @return List of open orders for the specified ticker and side.
    */
+  @Query("SELECT o FROM orders o WHERE o.ticker = ?1 AND o.side = ?2 AND o.filled < o.quantity")
   List<Order> findOpenOrdersByTickerAndSide(String ticker, OrderSide side);
 
 }

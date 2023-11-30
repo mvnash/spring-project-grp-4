@@ -1,10 +1,6 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +19,8 @@ public class Order {
    * Unique identifier for the order.
    */
   @Id
-  @Column(nullable = true)
+  @GeneratedValue(strategy = GenerationType.UUID)
+  @Column
   private String guid;
 
   /**
@@ -67,13 +64,13 @@ public class Order {
   /**
    * The limit price for a LIMIT order. Only applicable if the order type is LIMIT.
    */
-  @Column
+  @Column(name = "order_limit")
   private Double limit;
 
   /**
    * The quantity of the financial instrument that has already been traded.
    */
-  @Column(nullable = false)
+  @Column
   private int filled;
 
   /**
@@ -81,12 +78,14 @@ public class Order {
    * @return true if the order is invalid, false otherwise.
    */
   public boolean invalid() {
-    return owner == null || owner.isBlank() ||
+    return guid != null ||
+        owner == null || owner.isBlank() ||
         timestamp <= 0 ||
         ticker == null || ticker.isBlank() ||
         quantity <= 0 ||
         side == null ||
-        type == null || (type == OrderType.LIMIT && limit == null) ||
-        filled < 0;
+        type == null || (type == OrderType.LIMIT && (limit == null || limit < 0)) ||
+            (type == OrderType.MARKET && limit != null) ||
+        filled != 0;
   }
 }

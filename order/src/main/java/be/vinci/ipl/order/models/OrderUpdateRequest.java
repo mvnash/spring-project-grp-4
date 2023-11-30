@@ -1,4 +1,4 @@
-package be.vinci.ipl.order;
+package be.vinci.ipl.order.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,4 +14,8 @@ public class OrderUpdateRequest {
    * The new filled quantity to be updated for the order.
    */
   private int filled;
+
+  public boolean invalid() {
+    return filled <= 0;
+  }
 }

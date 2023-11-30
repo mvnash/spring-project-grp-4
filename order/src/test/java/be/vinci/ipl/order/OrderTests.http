@@ -1,0 +1,334 @@
+### Place a correct limit order
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place a correct market order
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner2",
+  "timestamp": 123456789,
+  "ticker": "LVMH",
+  "quantity": 100,
+  "side": "BUY",
+  "type": "MARKET"
+}
+
+### Place an incorrect order (guid present)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "guid": "guidTest",
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (filled present)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0,
+  "filled": 5
+}
+
+### Place an incorrect order (filled present)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0,
+  "filled": 5
+}
+
+### Place an incorrect order (bad owner)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no owner)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad timestamp)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": -1,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (blank ticker)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no ticker)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad quantity)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": -10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no side)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad side)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "TEST",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no type)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "limit": 150.0
+}
+
+### Place an incorrect order (bad type)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "TEST",
+  "limit": 150.0
+}
+
+### Place an incorrect order (no limit)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT"
+}
+
+### Place an incorrect order (bad limit)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": -150.0
+}
+
+### Place an incorrect order (market order whith limit)
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "MARKET",
+  "limit": 150.0
+}
+
+### Get order details with good guid
+GET http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+
+### Get order details with bad guid
+GET http://localhost:9002/order/TEST
+
+### Update order details with good guid and filled
+PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+Content-Type: application/json
+
+{
+  "filled": 5
+}
+
+### Update order details with good guid and filled
+PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+Content-Type: application/json
+
+{
+  "filled": 10
+}
+
+### Update order details with good guid but bad filled
+PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+Content-Type: application/json
+
+{
+  "filled": 100
+}
+
+### Update order details with good guid but bad filled
+PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+Content-Type: application/json
+
+{
+  "filled": 0
+}
+
+### Update order details with good guid but bad filled
+PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+Content-Type: application/json
+
+{
+  "filled": -1
+}
+
+### Update order details with bad guid
+PATCH http://localhost:9002/order/TEST
+Content-Type: application/json
+
+{
+  "filled": 10
+}
+
+### Update order details with bad guid
+PATCH http://localhost:9002/order/TEST
+Content-Type: application/json
+
+{
+  "filled": "TEST"
+}
+
+### Update order details with no guid
+PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+
+### Get orders by user with good username
+GET http://localhost:9002/order/by-user/someOwner
+
+### Get orders by user with good username
+GET http://localhost:9002/order/by-user/someOwner2
+
+### Get orders by user with bad username
+GET http://localhost:9002/order/by-user/test
+
+### Get open orders by ticker and side with good ticker and side
+GET http://localhost:9002/order/open/by-ticker/AAPL/BUY
+
+### Get open orders by ticker and side with good ticker and side
+GET http://localhost:9002/order/open/by-ticker/AAPL/SELL
+
+### Get open orders by ticker and side with good ticker and side
+GET http://localhost:9002/order/open/by-ticker/LVMH/BUY
+
+### Get order details with bad guid
+GET http://localhost:9002/order/open/by-ticker/LVMH/SELL
