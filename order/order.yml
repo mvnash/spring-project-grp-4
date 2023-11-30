@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Order Service
+  title: Order Service by Louis Vanbel
   description: |
     Le role de ce service est de maintenir la liste des ordres qui ont été passés et leur statut.
 

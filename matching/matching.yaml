@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Matching service
+  title: Matching service by Louis Vanbel
   description: |
     Le role de ce service est d'identifier des groupes d'ordres qui peuvent être (partiellement) satisfaits
     les uns par les autres. Lorsqu'un matching est effectué, ce service contacte le service d'exécution
