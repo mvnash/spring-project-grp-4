@@ -1,0 +1,14 @@
+### Place a correct order
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "AAPL",
+  "quantity": 10,
+  "side": "BUY",
+  "type": "LIMIT",
+  "limit": 150.0
+}
+
