@@ -7,20 +7,21 @@ faudra donc que chaque étudiant soit responsable de l'implémentation d'un serv
 ensembles.
 
 ### Petits services
-- Investor
-- Authentication
-- Order
-- Price
+- Investor : Quentin Garwig
+- Authentication : Maxime Vlaminck
+- Order : Louis Vanbel
+- Price : Joachim Bastin
 
 ### 'Gros' services
-- Wallet
-- Matching
-- Execution
-- Gateway
+- Wallet : Victor Denis
+- Matching : Louis Vanbel
+- Execution : Joachim Bastin
+- Gateway : Quentin Garwig
+- Call : Maxime Vlaminck
 
 --- La découpe en services commence ici ---------------------------------------------------------------
 
-## Investor
+## Investor : Quentin Garwig
 Le role de ce service est de maintenir les données signalétiques (userid, nom, prenom, etc...) 
 d'un investisseur.
 
@@ -28,10 +29,10 @@ d'un investisseur.
 Lorsqu'on crée un un investisseur ou qu'on le supprime, il est nécessaire d'aussi creer ses
 credentials (service authentication)
 
-## Authentication
+## Authentication : Maxime Vlaminck
 Le role de ce service est de permettre l'authentification des investisseurs sur la plateforme VSX.
 
-## Wallet
+## Wallet : Victor Denis
 Le role de ce service est de tenir à jour la liste des possessions d'un investisseur.
 C'est dans ce portefeuille qu'on peut retrouver la liste des positions (= un titre avec la quantité possédée).
 En particulier, il est intéressant de noter qu'on traite le cash de la meme façon que n'importe
@@ -42,7 +43,7 @@ possédés par un investisseur. Ceci signifie qu'il n'est pas possible de distin
 * Michel achete trois actions "LNRD", puis les revends 5 ans plus tard.
 * Michel n'a jamais acheté la moindre action "LNRD" parce qu'il pense que ce n'est pas une société fiable.
 
-## Order
+## Order : Louis Vanbel
 Le role de ce service est de maintenir la liste des ordres qui ont été passés et leur statut.
 
 **Note:** 
@@ -51,7 +52,7 @@ pas non plus le service d'ordre qui va se charger d'effectivement _exécuter_ le
 il est important de noter que la création d'un ordre va notifier le service de matching qui chercher
 à satisfaire l'ordre nouvellement créé avec un autre ordre présent dans le système.
 
-## Matching
+## Matching : Louis Vanbel
 Le role de ce service est d'identifier des groupes d'ordres qui peuvent être (partiellement) satisfaits
 les uns par les autres. Lorsqu'un matching est effectué, ce service contacte le service d'exécution
 et lui transmets les transactions qui doivent être effectuées.
@@ -65,7 +66,7 @@ système de verrouillage distribué).
 **DANS LE CADRE DE CE PROJET, ON VA CONSIDERER QUE CE N'EST PAS UN PROBLEME.** 
 C'est un choix délibéré qui vise à vous faciliter la vie tout et à garder un scope raisonnable pour ce projet.
 
-## Execution.
+## Execution : Joachim Bastin
 Le service d'exécution recoit des transactions  à effectuer, et se charge de contacter les autres
 services (Wallet, Order, Prices) pour refléter l'exécution de la transaction. Par exemple, lorsque
 le service reçoit une requête pour exécuter le la transaction: 
@@ -78,7 +79,7 @@ le service reçoit une requête pour exécuter le la transaction:
 6. Le service _Execution_ va contacter le service _Order_ pour mettre à jour le statut de l'ordre #CAFECAFE
 7. Le service _Execution_ va contacter le service _Order_ pour mettre à jour le statut de l'ordre #DEADBEEF
 
-## Price
+## Price : Joachim Bastin
 La seule responsabilité du service _Price_ est de se rappeler le dernier prix d'échange (= prix market) pour
 tous les titres en circulation sur la plateforme VSX. 
 
@@ -92,7 +93,7 @@ la réalité, mais c'est la logique que vous devez implémenter).
 En utilisant cette logique, et puisque tous les échanges sont libellés en CASH (il n'est donc pas possible
 de vendre 1 CASH pour autre chose que 1 CASH), le 'prix' du CASH restera toujours fixé à 1 (pratique non ?).
 
-## Gateway
+## Gateway : Quentin Garwig
 Le gateway est le point d'entrée vers VSX depuis le monde extérieur. Ce point d'entrée doit s'assurer
 que tous les services qui sont appelés, le soient dans des conditions correctes. C'est à dire que
 c'est le gateway qui va s'assurer que l'investisseur soit authentifié avant de pouvoir appeler d'autres 
@@ -114,7 +115,7 @@ le gateway permettra:
 * a un investisseur de retirer du CASH sur son compte
 * a un investisseur de connaitre le dernier prix d'échange de n'importe quel titre en échange sur la plateforme.
 
-## Call (pour les groupes de 5)
+## Call (pour les groupes de 5) : Maxime Vlaminck
 Ce service contacte tous les jours le service Wallet. Pour chaque investisseur possédant une quantité négative d'un instrument financier, 
 ce service prélève une quantité de CASH équivalent à 1% la valeur du titre multipliée par la quantité manquante.
 
