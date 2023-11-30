@@ -1,2 +1,2 @@
 ### Create review
-POST http://localhost:9003/matching/trigger/AAPL
+POST http://localhost:9003/trigger/AAPL

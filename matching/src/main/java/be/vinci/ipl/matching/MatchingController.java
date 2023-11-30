@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
  * Controller class for handling matching operations.
  */
 @RestController
-@RequestMapping("/matching")
 public class MatchingController {
 
   private final MatchingService matchingService;
