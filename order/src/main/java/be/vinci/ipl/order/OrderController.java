@@ -74,6 +74,15 @@ public class OrderController {
   @PatchMapping("/{guid}")
   public ResponseEntity<Void> updateOrder(@PathVariable String guid,
       @RequestBody OrderUpdateRequest updateRequest) {
+
+    Order orderToPatch = orderService.getOrderDetails(guid);
+    int orderFilled = orderToPatch.getFilled();
+
+    if (orderFilled >= updateRequest.getFilled() || orderFilled > orderToPatch.getQuantity() ||
+        updateRequest.invalid()) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
     boolean updated = orderService.updateOrder(guid, updateRequest);
 
     if (!updated) {
