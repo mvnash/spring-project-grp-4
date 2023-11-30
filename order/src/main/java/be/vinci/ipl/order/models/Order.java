@@ -86,6 +86,6 @@ public class Order {
         side == null ||
         type == null || (type == OrderType.LIMIT && (limit == null || limit < 0)) ||
             (type == OrderType.MARKET && limit != null) ||
-        filled < 0;
+        filled != 0;
   }
 }
