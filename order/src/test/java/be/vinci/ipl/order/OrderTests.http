@@ -1,4 +1,4 @@
-### Place a correct order
+### Place a correct limit order
 POST http://localhost:9002/order
 Content-Type: application/json
 
@@ -10,6 +10,19 @@ Content-Type: application/json
   "side": "BUY",
   "type": "LIMIT",
   "limit": 150.0
+}
+
+### Place a correct market order
+POST http://localhost:9002/order
+Content-Type: application/json
+
+{
+  "owner": "someOwner",
+  "timestamp": 123456789,
+  "ticker": "LVMH",
+  "quantity": 100,
+  "side": "BUY",
+  "type": "MARKET"
 }
 
 ### Place an incorrect order (guid present)
