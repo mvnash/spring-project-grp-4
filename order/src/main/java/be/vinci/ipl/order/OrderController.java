@@ -41,7 +41,7 @@ public class OrderController {
     Order createdOrder = orderService.placeOrder(order);
 
     if (createdOrder == null) {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
     }
 
     return new ResponseEntity<>(createdOrder, HttpStatus.OK);
