@@ -1,0 +1,5 @@
+### Trigger matching with good ticker
+POST http://localhost:9003/trigger/AAPL
+
+### Trigger matching with bad ticker
+POST http://localhost:9003/trigger/
