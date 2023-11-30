@@ -35,19 +35,19 @@ public class OrderService {
    * @return The placed order if successful, null if an order with the same GUID already exists.
    */
   public Order placeOrder(Order order) {
-    // Check if an order with the same GUID already exists
-    if (orderRepository.existsById(order.getGuid())) {
-      return null; // Order with the same GUID already exists
+    try {
+      // Save the order in the repository
+      orderRepository.save(order);
+
+      // Trigger the matching process for the order's ticker
+      matchingProxy.triggerMatching(order.getTicker());
+
+      // Return the placed order
+      return order;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
     }
-
-    // Save the order in the repository
-    orderRepository.save(order);
-
-    // Trigger the matching process for the order's ticker
-    matchingProxy.triggerMatching(order.getTicker());
-
-    // Return the placed order
-    return order;
   }
 
 
