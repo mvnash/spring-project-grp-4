@@ -14,4 +14,8 @@ public class OrderUpdateRequest {
    * The new filled quantity to be updated for the order.
    */
   private int filled;
+
+  public boolean invalid() {
+    return filled <= 0;
+  }
 }
