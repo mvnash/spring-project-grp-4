@@ -76,10 +76,11 @@ public class OrderController {
       @RequestBody OrderUpdateRequest updateRequest) {
 
     Order orderToPatch = orderService.getOrderDetails(guid);
-    int orderFilled = orderToPatch.getFilled();
+    int oldFilled = orderToPatch.getFilled();
+    int newFilled = updateRequest.getFilled();
+    int quantity = orderToPatch.getQuantity();
 
-    if (orderFilled >= updateRequest.getFilled() || orderFilled > orderToPatch.getQuantity() ||
-        updateRequest.invalid()) {
+    if (newFilled <= oldFilled || newFilled > quantity || updateRequest.invalid()) {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
