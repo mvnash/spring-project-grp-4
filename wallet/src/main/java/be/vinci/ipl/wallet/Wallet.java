@@ -18,22 +18,22 @@ public class Wallet {
     @Embeddable
     public static final class WalletId implements Serializable {
         private String investorUsername;
-        private String symbol; // Symbole de l'action ou "CASH" pour le cash
+        private String ticker;
 
         public WalletId() {
             this.investorUsername = null;
-            this.symbol = null;
+            this.ticker = null;
         }
         public WalletId(final String uname, final String ticker) {
             this.investorUsername = uname;
-            this.symbol = ticker;
+            this.ticker = ticker;
         }
     }
 
     @EmbeddedId
     private WalletId id;
     @Column(nullable = false, columnDefinition = "integer default 0")
-    private Integer quantity; // Quantité possédée
+    private Integer quantity;
 
 
     public Wallet(final String user, final String ticker, final int qty) {
@@ -44,7 +44,7 @@ public class Wallet {
     public String getUserName() {
         return this.id.investorUsername;
     }
-    public String getSymbol() {
-        return this.id.symbol;
+    public String getTicker() {
+        return this.id.ticker;
     }
 }

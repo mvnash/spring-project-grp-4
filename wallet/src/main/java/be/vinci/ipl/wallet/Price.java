@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Price {
-    private String ticker; // nom de l'action
-    private Double value;
+    private String ticker;
+    private Double valueT;
 }
