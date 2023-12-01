@@ -1,0 +1,11 @@
+### Get correct price for a ticker
+GET http://localhost:9007/price/AAPL
+Content-Type: application/json
+
+### Update correct price for a ticker
+PATCH http://localhost:9007/price/AAPL
+Content-Type: application/json
+
+{
+  "valueT": 10
+}

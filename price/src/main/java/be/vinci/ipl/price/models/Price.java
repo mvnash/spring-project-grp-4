@@ -16,5 +16,5 @@ public class Price {
     private String ticker;
 
     @Column(nullable = false)
-    private Double value;
+    private Double valueT;
 }
