@@ -20,14 +20,14 @@ public class PriceService {
      */
     public Double getLastSalePrice(String ticker) {
         Price price = repository.findById(ticker).orElse(null);
-        if (price == null){ // TODO requis ?
-            price = new Price(); // TODO un autre new ??
+        if (price == null){
+            price = new Price();
             price.setTicker(ticker);
-            price.setValue(1.0);
+            price.setValueT(1.0);
             repository.save(price);
         }
         
-        return price.getValue();
+        return price.getValueT();
     }
 
     /**
@@ -37,12 +37,11 @@ public class PriceService {
      * @return True if the price was updated, false otherwise
      */
     public boolean updateLastSalePrice(String ticker, Double newPrice) {
-        if (!repository.existsById(ticker)) return false;
-
-        Price price = repository.findById(ticker).orElse(null); // TODO fix this
-        price.setValue(newPrice);
+        Price price = repository.findById(ticker).orElse(null);
+        if (price == null)
+            return false;
+        price.setValueT(newPrice);
         repository.save(price);
-
         return true;
     }
 }

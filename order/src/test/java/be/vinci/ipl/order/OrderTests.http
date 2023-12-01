@@ -1,5 +1,5 @@
 ### Place a correct limit order
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### Place a correct market order
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -248,7 +248,7 @@ Content-Type: application/json
 }
 
 ### Get order details with good guid
-GET http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+GET http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 
 ### Get order details with bad guid
 GET http://localhost:9002/order/TEST

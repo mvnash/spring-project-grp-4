@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/price")
 public class PriceController {
@@ -21,10 +23,13 @@ public class PriceController {
     }
 
     @PatchMapping("/{ticker}")
-    public ResponseEntity<Void> updateLastSalePrice(@PathVariable String ticker, @RequestBody Double newPrice) {
-        if (newPrice <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Void> updateLastSalePrice(@PathVariable String ticker, @RequestBody Map<String, Double> body) {
+        Double valueT = body.get("valueT");
 
-        boolean updated = service.updateLastSalePrice(ticker, newPrice);
+        System.out.println(valueT);
+        if (valueT <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+        boolean updated = service.updateLastSalePrice(ticker, valueT);
 
         if (!updated) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else return new ResponseEntity<>(HttpStatus.OK);
