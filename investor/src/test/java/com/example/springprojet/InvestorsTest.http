@@ -1,23 +1,25 @@
 ### create an investor
-POST http://localhost:8081/investors/user1
+POST http://localhost:9004/investors/user1
 Content-Type: application/json
 
 {
   "username" : "user1",
   "email" : "mymail.com",
   "lastname": "1",
-  "firstname": "user"
+  "firstname": "user",
+  "birthdate": "28/19/2000",
+  "password": "michel"
 }
 
 ###Read all investors
-GET http://localhost:8081/investors
+GET http://localhost:9004/investors
 
 ###read one investor
-GET http://localhost:8080/investors/user1
+GET http://localhost:9004/investors/user1
 
 
 ###update one investor
-PUT http://localhost:8081/investors/user1
+PUT http://localhost:9004/investors/user1
 Content-Type: application/json
 
 {
@@ -27,4 +29,4 @@ Content-Type: application/json
 }
 
 ###delete one investor
-DELETE http://localhost:8081/investors/user1
+DELETE http://localhost:9004/investors/user1

@@ -63,18 +63,7 @@ public class GatewayService {
 
 
 
-  public void createInvestor(InvestorWithCredentials investor) throws BadRequestException, ConflictException {
-    try {
-      investorsProxy.createInvestor(investor.getUsername(), investor.toInvestor());
-    } catch (FeignException e) {
-      if (e.status() == 400)
-        throw new BadRequestException();
-      else if (e.status() == 409)
-        throw new ConflictException();
-      else
-        throw e;
-    }
-
+  public Investor createInvestor(InvestorWithCredentials investor) throws BadRequestException, ConflictException {
     try {
       authenticationProxy.createCredentials(investor.getUsername(),  investor.toCredentials());
     } catch (FeignException e) {
@@ -90,6 +79,20 @@ public class GatewayService {
       else
         throw e;
     }
+    try {
+      return investorsProxy.createInvestor(investor.getUsername(), investor.toInvestor());
+
+    } catch (FeignException e) {
+      if (e.status() == 400)
+        throw new BadRequestException();
+      else if (e.status() == 409)
+        throw new ConflictException();
+      else
+        throw e;
+    }
+
+
+
   }
   public List<Investor> readAllInvestors() {
     try {
