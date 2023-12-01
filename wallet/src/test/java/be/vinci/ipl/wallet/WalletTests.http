@@ -1,5 +1,3 @@
 ### Trigger matching with good ticker
 GET http://localhost:9008/wallet/victor
 
-### Trigger matching with bad ticker
-POST http://localhost:9008/trigger/
