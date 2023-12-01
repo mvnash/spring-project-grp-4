@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (guid present)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -41,7 +41,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (filled present)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -56,7 +56,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (filled present)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -71,7 +71,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (bad owner)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -85,7 +85,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (no owner)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -98,7 +98,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (bad timestamp)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -112,7 +112,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (blank ticker)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -126,7 +126,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (no ticker)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -139,7 +139,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (bad quantity)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -153,7 +153,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (no side)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -166,7 +166,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (bad side)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -180,7 +180,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (no type)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -193,7 +193,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (bad type)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -207,7 +207,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (no limit)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -220,7 +220,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (bad limit)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -234,7 +234,7 @@ Content-Type: application/json
 }
 
 ### Place an incorrect order (market order whith limit)
-POST http://localhost:9002/order
+POST http://localhost:9006/order
 Content-Type: application/json
 
 {
@@ -251,10 +251,10 @@ Content-Type: application/json
 GET http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 
 ### Get order details with bad guid
-GET http://localhost:9002/order/TEST
+GET http://localhost:9006/order/TEST
 
 ### Update order details with good guid and filled
-PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+PATCH http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 Content-Type: application/json
 
 {
@@ -262,7 +262,7 @@ Content-Type: application/json
 }
 
 ### Update order details with good guid and filled
-PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+PATCH http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 Content-Type: application/json
 
 {
@@ -270,7 +270,7 @@ Content-Type: application/json
 }
 
 ### Update order details with good guid but bad filled
-PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+PATCH http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 Content-Type: application/json
 
 {
@@ -278,7 +278,7 @@ Content-Type: application/json
 }
 
 ### Update order details with good guid but bad filled
-PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+PATCH http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 Content-Type: application/json
 
 {
@@ -286,7 +286,7 @@ Content-Type: application/json
 }
 
 ### Update order details with good guid but bad filled
-PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+PATCH http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 Content-Type: application/json
 
 {
@@ -294,7 +294,7 @@ Content-Type: application/json
 }
 
 ### Update order details with bad guid
-PATCH http://localhost:9002/order/TEST
+PATCH http://localhost:9006/order/TEST
 Content-Type: application/json
 
 {
@@ -302,7 +302,7 @@ Content-Type: application/json
 }
 
 ### Update order details with bad guid
-PATCH http://localhost:9002/order/TEST
+PATCH http://localhost:9006/order/TEST
 Content-Type: application/json
 
 {
@@ -310,25 +310,25 @@ Content-Type: application/json
 }
 
 ### Update order details with no guid
-PATCH http://localhost:9002/order/1810ff96-94fd-43e1-8407-ad89abecac60
+PATCH http://localhost:9006/order/1810ff96-94fd-43e1-8407-ad89abecac60
 
 ### Get orders by user with good username
-GET http://localhost:9002/order/by-user/someOwner
+GET http://localhost:9006/order/by-user/someOwner
 
 ### Get orders by user with good username
-GET http://localhost:9002/order/by-user/someOwner2
+GET http://localhost:9006/order/by-user/someOwner2
 
 ### Get orders by user with bad username
-GET http://localhost:9002/order/by-user/test
+GET http://localhost:9006/order/by-user/test
 
 ### Get open orders by ticker and side with good ticker and side
-GET http://localhost:9002/order/open/by-ticker/AAPL/BUY
+GET http://localhost:9006/order/open/by-ticker/AAPL/BUY
 
 ### Get open orders by ticker and side with good ticker and side
-GET http://localhost:9002/order/open/by-ticker/AAPL/SELL
+GET http://localhost:9006/order/open/by-ticker/AAPL/SELL
 
 ### Get open orders by ticker and side with good ticker and side
-GET http://localhost:9002/order/open/by-ticker/LVMH/BUY
+GET http://localhost:9006/order/open/by-ticker/LVMH/BUY
 
 ### Get order details with bad guid
-GET http://localhost:9002/order/open/by-ticker/LVMH/SELL
+GET http://localhost:9006/order/open/by-ticker/LVMH/SELL
