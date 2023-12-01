@@ -75,15 +75,6 @@ public class OrderController {
   public ResponseEntity<Void> updateOrder(@PathVariable String guid,
       @RequestBody OrderUpdateRequest updateRequest) {
 
-    Order orderToPatch = orderService.getOrderDetails(guid);
-    int oldFilled = orderToPatch.getFilled();
-    int newFilled = updateRequest.getFilled();
-    int quantity = orderToPatch.getQuantity();
-
-    if (newFilled <= oldFilled || newFilled > quantity || updateRequest.invalid()) {
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
     boolean updated = orderService.updateOrder(guid, updateRequest);
 
     if (!updated) {

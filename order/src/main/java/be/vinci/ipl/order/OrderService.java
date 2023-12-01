@@ -66,20 +66,37 @@ public class OrderService {
    *
    * @param guid          The guid of the order to be updated.
    * @param updateRequest The request containing the new filled quantity.
-   * @return True if the order was successfully updated, false if the order couldn't be found.
+   * @return True if the order was successfully updated, false if the order couldn't be found or the update request is invalid.
    */
   public boolean updateOrder(String guid, OrderUpdateRequest updateRequest) {
     Order existingOrder = orderRepository.findById(guid).orElse(null);
 
-    if (existingOrder == null) {
-      return false; // Order not found
+    if (existingOrder == null || !isValidUpdate(existingOrder, updateRequest)) {
+      return false; // Order not found or update request is invalid
     }
 
     // Update the filled quantity
     existingOrder.setFilled(updateRequest.getFilled());
 
     orderRepository.save(existingOrder);
-    return true;
+    return true; // Successfully updated
+  }
+
+  /**
+   * Validates the update request for an order.
+   * The specifications don't ask to validate it
+   * but I chose to do it anyway to avoid any inconsistencies.
+   *
+   * @param existingOrder The existing order.
+   * @param updateRequest The update request.
+   * @return True if the update request is valid, false otherwise.
+   */
+  private boolean isValidUpdate(Order existingOrder, OrderUpdateRequest updateRequest) {
+    int oldFilled = existingOrder.getFilled();
+    int newFilled = updateRequest.getFilled();
+    int quantity = existingOrder.getQuantity();
+
+    return newFilled > oldFilled && newFilled <= quantity && !updateRequest.invalid();
   }
 
   /**
