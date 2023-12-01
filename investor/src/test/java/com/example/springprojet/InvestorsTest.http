@@ -1,12 +1,14 @@
 ### create an investor
-POST http://localhost:9004/investor/user1
+POST http://localhost:9004/investor/victor
 Content-Type: application/json
 
 {
-  "username" : "user1",
+  "username" : "victor",
   "email" : "mymail.com",
   "lastname": "1",
-  "firstname": "user"
+  "firstname": "user",
+  "birthdate": "2002-05-02",
+  "password": "test123"
 }
 
 ###Read all investors

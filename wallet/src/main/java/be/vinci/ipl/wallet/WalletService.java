@@ -1,6 +1,7 @@
 package be.vinci.ipl.wallet;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -41,8 +42,7 @@ public class WalletService {
             return null;
 
         Set<Wallet> wallets =  repository.getAllByInvestorUsername(username);
-        if(wallets.isEmpty())
-            return null;
+
         Set<PositionValue> positions = new HashSet<>();
         for ( Wallet wallet : wallets ){
             PositionValue pv = new PositionValue();
