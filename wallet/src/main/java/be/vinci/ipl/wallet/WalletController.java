@@ -38,6 +38,7 @@ public class WalletController {
     @PostMapping("/wallet/{username}")
     public ResponseEntity<Set<Wallet>> addPosition(@PathVariable String username, @RequestBody Set<Position> newPositions){
         Set<Wallet> actualWallet = service.addPositions(username, newPositions);
+
         // Investor not found
         if(actualWallet == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

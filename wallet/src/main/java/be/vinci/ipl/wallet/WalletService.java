@@ -26,7 +26,7 @@ public class WalletService {
 
         double netWorth = 0.0;
         for ( Wallet position : positions ){
-            Double price = priceProxy.getPriceForTicker(position.getSymbol()).getValue();
+            Double price = priceProxy.getPriceForTicker(position.getTicker()).getValue();
             netWorth += position.getQuantity() * price;
         }
         return netWorth;
@@ -46,9 +46,9 @@ public class WalletService {
         Set<PositionValue> positions = new HashSet<>();
         for ( Wallet wallet : wallets ){
             PositionValue pv = new PositionValue();
-            pv.setSymbol(wallet.getSymbol());
+            pv.setSymbol(wallet.getTicker());
             pv.setQuantity(wallet.getQuantity());
-            pv.setSymbol(wallet.getSymbol());
+            pv.setSymbol(wallet.getTicker());
             positions.add(pv);
         }
         return positions;
@@ -64,7 +64,7 @@ public class WalletService {
         for(Position position : newPositions){
             for ( Wallet wallet : positions ){
                 // Already possessed
-                if(position.getSymbol().equals(wallet.getSymbol())){
+                if(position.getSymbol().equals(wallet.getTicker())){
                     // yes, update its quantity
                     position.setQuantity(position.getQuantity()+ wallet.getQuantity());
                     break;
