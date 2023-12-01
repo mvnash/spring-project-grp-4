@@ -9,6 +9,8 @@ import java.util.Set;
 
 @Repository
 public interface WalletRepository extends CrudRepository<Wallet, String> {
+    @Query("SELECT w FROM wallets w WHERE w.id.investorUsername = :investorUsername")
     Set<Wallet> getAllByInvestorUsername(@Param("investorUsername") String investorUsername);
+
 }
 

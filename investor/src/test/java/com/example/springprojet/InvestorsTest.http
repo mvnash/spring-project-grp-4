@@ -1,0 +1,30 @@
+### create an investor
+POST http://localhost:8081/investors/user1
+Content-Type: application/json
+
+{
+  "username" : "user1",
+  "email" : "mymail.com",
+  "lastname": "1",
+  "firstname": "user"
+}
+
+###Read all investors
+GET http://localhost:8081/investors
+
+###read one investor
+GET http://localhost:8080/investors/user1
+
+
+###update one investor
+PUT http://localhost:8081/investors/user1
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "mynewemail.be",
+  "lastname": "22"
+}
+
+###delete one investor
+DELETE http://localhost:8081/investors/user1
