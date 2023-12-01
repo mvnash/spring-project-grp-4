@@ -15,8 +15,8 @@ public class WalletController {
 
     @GetMapping("/wallet/{username}/net-worth")
     public ResponseEntity<Double> getNetWorth(@PathVariable String username){
+
         double netWorth = service.getNetWorth(username);
-        // TODO : 400 | UNAUTHORIZED si ce n'est pas l'investisseur connecté.
 
         if(netWorth == -1){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

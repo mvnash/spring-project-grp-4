@@ -16,14 +16,12 @@ public class WalletService {
     //public ResponseEntity<Double> getNetWorth(){
     public double getNetWorth(String username){
         // Get a set of wallet with all the positions of the user
-        Set<Wallet> wallets =  repository.getAllByInvestorUsername(username);
-        if(wallets == null)
-            return -1;
+        Set<Wallet> positions =  repository.getAllByInvestorUsername(username);
 
         double netWorth = 0.0;
-        for ( Wallet wallet : wallets ){
-            Double price = priceProxy.getPriceForTicker(wallet.getSymbol()).getValue();
-            netWorth += wallet.getQuantity() * price;
+        for ( Wallet position : positions ){
+            Double price = priceProxy.getPriceForTicker(position.getSymbol()).getValue();
+            netWorth += position.getQuantity() * price;
         }
         return netWorth;
     }
