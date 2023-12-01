@@ -27,3 +27,9 @@ Content-Type: application/json
   "pseudo": "Cat4Life",
   "password": "azerty"
 }
+
+### Verify token
+POST http://localhost:9004/authentication/verify
+Content-Type: application/json
+
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJhdXRoMCIsInBzZXVkbyI6IkNhdDRMaWZlIn0.bDhK9qAwQlbMH8J-ejVuthoX5pcwPvApTqv0L3volzwdglnlVtATVqnxqyyX-BcGs9A_VOIAB6r1R8oK3k66pw
