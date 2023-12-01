@@ -26,7 +26,7 @@ public class WalletService {
 
         double netWorth = 0.0;
         for ( Wallet position : positions ){
-            Double price = priceProxy.getPriceForTicker(position.getTicker()).getValueT();
+            Double price = priceProxy.getPriceForTicker(position.getTicker()).getValue();
             netWorth += position.getQuantity() * price;
         }
         return netWorth;

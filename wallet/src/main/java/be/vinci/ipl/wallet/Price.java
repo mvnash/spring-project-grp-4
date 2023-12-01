@@ -9,5 +9,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Price {
     private String ticker;
-    private Double valueT;
+    private Double value;
 }
