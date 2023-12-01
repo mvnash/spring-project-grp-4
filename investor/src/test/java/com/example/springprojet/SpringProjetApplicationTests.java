@@ -1,13 +1,13 @@
-package be.vinci.ipl.investor;
+package com.example.springprojet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InvestorApplicationTests {
+class SpringProjetApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }

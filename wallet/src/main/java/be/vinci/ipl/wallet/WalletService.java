@@ -11,10 +11,16 @@ import java.util.Set;
 public class WalletService {
     private WalletRepository repository;
     private PriceProxy priceProxy;
+    private InvestorProxy investorProxy;
 
     //@GetMapping("/wallet/{username}/net-worth")
     //public ResponseEntity<Double> getNetWorth(){
-    public double getNetWorth(String username){
+    public Double getNetWorth(String username){
+        // Check if the investor exists
+        Investor investor = investorProxy.getInvestor(username);
+        if(investor == null)
+            return null;
+
         // Get a set of wallet with all the positions of the user
         Set<Wallet> positions =  repository.getAllByInvestorUsername(username);
 
@@ -29,6 +35,11 @@ public class WalletService {
     //@GetMapping("/wallet/{username}")
     //public ResponseEntity<PositionValue> getOpenPositions(){
     public Set<PositionValue> getOpenPositions(String username){
+        // Check if the investor exists
+        Investor investor = investorProxy.getInvestor(username);
+        if(investor == null)
+            return null;
+
         Set<Wallet> wallets =  repository.getAllByInvestorUsername(username);
         if(wallets.isEmpty())
             return null;
@@ -44,8 +55,10 @@ public class WalletService {
     }
 
     public Set<Wallet> addPositions(String username, Set<Position> newPositions){
-        if(newPositions.isEmpty())
+        Investor investor = investorProxy.getInvestor(username);
+        if(investor == null)
             return null;
+
         Set<Wallet> positions =  repository.getAllByInvestorUsername(username);
 
         for(Position position : newPositions){

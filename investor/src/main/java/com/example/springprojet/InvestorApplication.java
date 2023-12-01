@@ -1,4 +1,4 @@
-package be.vinci.ipl.investor;
+package com.example.springprojet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class InvestorApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(InvestorApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(InvestorApplication.class, args);
+	}
 
 }
