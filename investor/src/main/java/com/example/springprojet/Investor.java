@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-@Entity(name="investors")
+@Entity(name="investor")
 public class Investor {
 
   @Id
