@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties(prefix = "be.vinci.ipl.catflix.authentication")
+@ConfigurationProperties(prefix = "be.vinci.ipl.authentication")
 public class AuthenticationProperties {
     private String secret;
 }
