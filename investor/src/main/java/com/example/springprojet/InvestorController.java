@@ -20,11 +20,11 @@ public class InvestorController {
     this.service=service;
   }
 
-  @GetMapping("/investors")
+  @GetMapping("/investor")
   public Iterable<Investor> getAllInvestors() {
     return service.readAllInvestors();
   }
-  @PostMapping("/investors/{username}")
+  @PostMapping("/investor/{username}")
   public ResponseEntity<Investor> createOne(@PathVariable String username, @RequestBody Investor investor){
     if(!Objects.equals(investor.getUsername(),username)||username.isBlank()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     Investor foundInvestor= service.readOne(username);
@@ -34,7 +34,7 @@ public class InvestorController {
     return new ResponseEntity<>(createdInvestor,HttpStatus.CREATED);
   }
 
-  @GetMapping("/investors/{username}")
+  @GetMapping("/investor/{username}")
   public ResponseEntity<Investor> readOne(@PathVariable String username ){
     if(username.isBlank()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
     Investor investor = service.readOne(username);
@@ -42,7 +42,7 @@ public class InvestorController {
     return new ResponseEntity<>(investor,HttpStatus.OK);
 
   }
-  @PutMapping("/investors/{username}")
+  @PutMapping("/investor/{username}")
   public ResponseEntity<Investor> updateOne(@PathVariable String username, @RequestBody Investor investor){
     //a voir si l'investor peut changer de username ou non.
     if(!Objects.equals(investor.getUsername(),username)||username.isBlank()) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -52,7 +52,7 @@ public class InvestorController {
     return new ResponseEntity<>(updatedInvestor,HttpStatus.OK);
   }
 
-  @DeleteMapping("/investors/{username}")
+  @DeleteMapping("/investor/{username}")
   public ResponseEntity<Investor> deleteOne(@PathVariable String username){
     if(username.isBlank()){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
