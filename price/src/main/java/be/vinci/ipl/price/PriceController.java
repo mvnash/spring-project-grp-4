@@ -24,12 +24,12 @@ public class PriceController {
 
     @PatchMapping("/{ticker}")
     public ResponseEntity<Void> updateLastSalePrice(@PathVariable String ticker, @RequestBody Map<String, Double> body) {
-        Double valueT = body.get("valueT");
+        Double value = body.get("value");
 
-        System.out.println(valueT);
-        if (valueT <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        System.out.println(value);
+        if (value <= 0) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-        boolean updated = service.updateLastSalePrice(ticker, valueT);
+        boolean updated = service.updateLastSalePrice(ticker, value);
 
         if (!updated) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         else return new ResponseEntity<>(HttpStatus.OK);

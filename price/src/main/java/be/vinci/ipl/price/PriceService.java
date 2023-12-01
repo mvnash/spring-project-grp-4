@@ -23,11 +23,11 @@ public class PriceService {
         if (price == null){
             price = new Price();
             price.setTicker(ticker);
-            price.setValueT(1.0);
+            price.setValue(1.0);
             repository.save(price);
         }
         
-        return price.getValueT();
+        return price.getValue();
     }
 
     /**
@@ -40,7 +40,7 @@ public class PriceService {
         Price price = repository.findById(ticker).orElse(null);
         if (price == null)
             return false;
-        price.setValueT(newPrice);
+        price.setValue(newPrice);
         repository.save(price);
         return true;
     }

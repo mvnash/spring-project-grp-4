@@ -7,5 +7,5 @@ PATCH http://localhost:9007/price/AAPL
 Content-Type: application/json
 
 {
-  "valueT": 10
+  "value": 10
 }
