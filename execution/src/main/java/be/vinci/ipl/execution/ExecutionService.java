@@ -3,6 +3,9 @@ package be.vinci.ipl.execution;
 import be.vinci.ipl.execution.models.Position;
 import be.vinci.ipl.execution.models.Transaction;
 
+import be.vinci.ipl.execution.repositories.OrderProxy;
+import be.vinci.ipl.execution.repositories.PriceProxy;
+import be.vinci.ipl.execution.repositories.WalletProxy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,8 +14,6 @@ public class ExecutionService {
     private final WalletProxy walletProxy;
     private final OrderProxy orderProxy;
     private final PriceProxy priceProxy;
-
-    private final VideosProxy videosProxy;
 
     public ExecutionService(WalletProxy walletProxy, OrderProxy orderProxy, PriceProxy priceProxy) {
         this.walletProxy = walletProxy;
@@ -50,7 +51,7 @@ public class ExecutionService {
         priceProxy.updateLastSalePrice(transaction.getTicker(), transaction.getPrice()); // TODO getPrice ou bien autre chose ???
 
         // TODO mettre à jour le status des ordres achat/vente
-        orderProxy.updateOne(transaction.getBuyOrderGuid, 1); // TODO filled =? 1 ??? ou pas objet ???
-        orderProxy.updateOne(transaction.getSellOrderGuid, 1);
+        orderProxy.updateOne(transaction.getBuy_order_guid(), "1"); // TODO filled =? 1 ??? ou pas objet ???
+        orderProxy.updateOne(transaction.getSell_order_guid(), "1");
     }
 }
