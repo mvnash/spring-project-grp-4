@@ -12,8 +12,8 @@
         <module name="price" />
         <module name="eureka" />
         <module name="SpringProjet" />
-        <module name="WalletService" />
         <module name="gateway" />
+        <module name="WalletService" />
         <module name="matching" />
         <module name="authentication" />
         <module name="order" />
