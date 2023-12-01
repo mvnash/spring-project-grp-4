@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import be.vinci.ipl.execution.models.Transaction;
 
 @RestController
-@RequestMapping("/execute")
+@RequestMapping("/execution")
 public class ExecutionController {
 
     private final ExecutionService service;
